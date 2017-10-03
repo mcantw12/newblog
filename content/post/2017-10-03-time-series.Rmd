@@ -1,0 +1,28 @@
+---
+title: Time Series Graphs
+author: ''
+date: '2017-10-03'
+slug: time-series
+categories: []
+tags: []
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+library(Lahman)
+library(sqldf)
+library(ggplot2)
+```
+
+Any attribute being compared to a timeline is called a time-series graph. Here we used the 'point' specification along with 'line' to ensure that both points and lines are marked. We also labeled the axis with 'xlab' and 'ylab'
+
+```{r}
+query<-"SELECT yearID, HR FROM Batting WHERE playerID='ruthba01'"
+result<-sqldf(query)
+ggplot()+
+  geom_point(data=result, aes(x=yearID, y=HR))+
+  geom_line(data=result, aes(x=yearID, y=HR))+
+  ggtitle("Ruth Homeruns by Year")+
+  xlab("Home Runs")+
+  ylab("Year")
+```

@@ -1,0 +1,27 @@
+---
+title: Histograms
+author: ''
+date: '2017-10-03'
+slug: scatterplots, Rmarkdown, SQLDF
+categories: []
+tags: []
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+library(Lahman)
+library(sqldf)
+library(ggplot2)
+```
+
+A histogram measures two attributes next to eachother in a very visual format. By storing our SQL query as 'result' we can use that as the data for our ggplot. Specifying 'histogram' after 'geom_' defines this as a scatterplot. The title is added with the command 'ggtitle'.
+
+```{r warning=FALSE}
+query<-"SELECT weight FROM Master"
+result<-sqldf(query)
+ggplot()+
+  geom_histogram(data=result, aes(x=weight), color='white', fill='black', bins=50)+
+  ggtitle("Body Weight Distribution")
+```
+
+
